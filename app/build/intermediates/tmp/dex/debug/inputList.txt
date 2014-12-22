@@ -1,0 +1,3 @@
+C:\Users\DBoyev\workspace\CriminalIntent1\app\build\intermediates\classes\debug
+C:\Users\DBoyev\workspace\CriminalIntent1\app\build\intermediates\pre-dexed\debug\classes-96d8b8213848d05dcade56ee9a2b9abe727b753b.jar
+C:\Users\DBoyev\workspace\CriminalIntent1\app\build\intermediates\pre-dexed\debug\support-v4-18.0.0-a45ba64511ea648bd8f790f0462fd1fb074c2646.jar

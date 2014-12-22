@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CriminalIntent</string>
+    <string name="title_activity_crime">CrimeActivity</string>
+    <string name="crime_title_hint">Укажите заголовок преступления</string>
+    <string name="crime_title_label">Наименование</string>
+    <string name="crime_details_label">Детали</string>
+    <string name="crime_solved_label">Выяснено?</string>
+    <string name="crimes_title">Преступления</string>
+    <string name="date_picker_title">Дата преступления:</string>
+    <string name="new_crime">Новое преступление</string>
+    <string name="show_subtitle">Показать описание</string>
+    <string name="hide_subtitle">Скрыть описание</string>
+    <string name="subtitle">If you see something, say something.</string>
+    <string name="delete_crime">Удалить</string>
+
+</resources>
