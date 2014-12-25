@@ -14,5 +14,5 @@
     <string name="hide_subtitle">Скрыть описание</string>
     <string name="subtitle">If you see something, say something.</string>
     <string name="delete_crime">Удалить</string>
-
+    <string name="take">Take!</string>
 </resources>

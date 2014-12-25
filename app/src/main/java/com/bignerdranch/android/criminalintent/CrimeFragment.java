@@ -6,6 +6,7 @@ import java.util.UUID;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,17 +24,19 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 public class CrimeFragment extends Fragment {
-	public static final String EXTRA_CRIME_ID = 
+	public static final  String EXTRA_CRIME_ID =
 			"com.bignerdranch.android.criminalintent.crime_id";
-	private static final String DIALOG_DATE = "date";
-	private static final int REQUEST_DATE = 0;
-	private Crime mCrime;
+	private static final String DIALOG_DATE    = "date";
+	private static final int    REQUEST_DATE   = 0;
+	private Crime    mCrime;
 	private EditText mTitleField;
-	private Button mDateButton;
+	private Button   mDateButton;
 	private CheckBox mSolvedCheckBox;
 	private static final String TAG = "Crime";
+	private ImageButton mPhotoButton;
 
 	@Override
 	public void onPause() {
@@ -45,23 +48,23 @@ public class CrimeFragment extends Fragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case android.R.id.home:
-			Log.d(TAG, "Call CrimeFragment-android.R.id.home");
+			case android.R.id.home:
+				Log.d(TAG, "Call CrimeFragment-android.R.id.home");
 			/*	Intent intent = new Intent(getActivity(), CrimeListActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			 */
 
-			if (NavUtils.getParentActivityName(getActivity()) != null) {
-				NavUtils.navigateUpFromSameTask(getActivity());
-			}
-			return true;
-		case R.id.menu_item_show_subtitle:
-			if (getActivity().getActionBar().getSubtitle() == null) {
-				getActivity().getActionBar().setSubtitle(R.string.subtitle);
-				item.setTitle(R.string.hide_subtitle);
-			} else {
-				getActivity().getActionBar().setSubtitle(null);
+				if (NavUtils.getParentActivityName(getActivity()) != null) {
+					NavUtils.navigateUpFromSameTask(getActivity());
+				}
+				return true;
+			case R.id.menu_item_show_subtitle:
+				if (getActivity().getActionBar().getSubtitle() == null) {
+					getActivity().getActionBar().setSubtitle(R.string.subtitle);
+					item.setTitle(R.string.hide_subtitle);
+				} else {
+					getActivity().getActionBar().setSubtitle(null);
 				item.setTitle(R.string.show_subtitle);
 			}
 			return true; 
@@ -121,11 +124,11 @@ public class CrimeFragment extends Fragment {
 
 			public void beforeTextChanged(CharSequence c, int start, int count,
 					int after) {
-				// Здесь намеренно оставлено пустое место
+				// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 			}
 
 			public void afterTextChanged(Editable c) {
-				// И здесь тоже
+				// пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 			}
 		});
 		mDateButton = (Button)v.findViewById(R.id.crime_date);
@@ -146,11 +149,25 @@ public class CrimeFragment extends Fragment {
 		mSolvedCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 			{
-				// Назначение флага раскрытия преступления
+				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				mCrime.setSolved(isChecked);
 			}
 		});
-
+		mPhotoButton = (ImageButton)v.findViewById(R.id.crime_imageButton);
+		mPhotoButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getActivity(), CrimeCameraActivity.class);
+				startActivity(i);
+			}
+		});
+		// Р•СЃР»Рё РєР°РјРµСЂР° РЅРµРґРѕСЃС‚СѓРїРЅР°, Р·Р°Р±Р»РѕРєРёСЂРѕРІР°С‚СЊ С„СѓРЅРєС†РёРѕРЅР°Р»СЊРЅРѕСЃС‚СЊ
+		// СЂР°Р±РѕС‚С‹ СЃ РєР°РјРµСЂРѕР№
+		PackageManager pm = getActivity().getPackageManager();
+		if (!pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) &&
+				!pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)) {
+			mPhotoButton.setEnabled(false);
+		}
 		return v;
 	}
 }

@@ -756,7 +756,8 @@ containing a value of this type.
         public static final int abc_textfield_searchview_holo_light=0x7f020054;
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
-        public static final int ic_launcher=0x7f020057;
+        public static final int background_activated=0x7f020057;
+        public static final int ic_launcher=0x7f020058;
     }
     public static final class id {
         public static final int action_bar=0x7f08001b;
@@ -777,12 +778,15 @@ containing a value of this type.
         public static final int beginning=0x7f08000e;
         public static final int checkbox=0x7f08002c;
         public static final int collapseActionView=0x7f080013;
-        public static final int crime_date=0x7f080046;
-        public static final int crime_list_item_dateTextView=0x7f08004a;
-        public static final int crime_list_item_solvedCheckBox=0x7f080048;
-        public static final int crime_list_item_titleTextView=0x7f080049;
-        public static final int crime_solved=0x7f080047;
-        public static final int crime_title=0x7f080045;
+        public static final int crime_camera_surfaceView=0x7f080049;
+        public static final int crime_camera_takePictureButton=0x7f08004a;
+        public static final int crime_date=0x7f080047;
+        public static final int crime_imageButton=0x7f080045;
+        public static final int crime_list_item_dateTextView=0x7f08004d;
+        public static final int crime_list_item_solvedCheckBox=0x7f08004b;
+        public static final int crime_list_item_titleTextView=0x7f08004c;
+        public static final int crime_solved=0x7f080048;
+        public static final int crime_title=0x7f080046;
         public static final int default_activity_button=0x7f080027;
         public static final int dialog=0x7f080017;
         public static final int dialog_date_datePicker=0x7f080044;
@@ -801,8 +805,9 @@ containing a value of this type.
         public static final int left_icon=0x7f080032;
         public static final int listMode=0x7f080005;
         public static final int list_item=0x7f080028;
-        public static final int menu_item_new_crime=0x7f08004b;
-        public static final int menu_item_show_subtitle=0x7f08004c;
+        public static final int menu_item_delete_crime=0x7f08004e;
+        public static final int menu_item_new_crime=0x7f08004f;
+        public static final int menu_item_show_subtitle=0x7f080050;
         public static final int middle=0x7f080010;
         public static final int never=0x7f080015;
         public static final int none=0x7f080011;
@@ -868,11 +873,13 @@ containing a value of this type.
         public static final int activity_fragment=0x7f030018;
         public static final int dialog_date=0x7f030019;
         public static final int fragment_crime=0x7f03001a;
-        public static final int list_item_crime=0x7f03001b;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001c;
+        public static final int fragment_crime_camera=0x7f03001b;
+        public static final int list_item_crime=0x7f03001c;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
     }
     public static final class menu {
-        public static final int fragment_crime_list=0x7f0c0000;
+        public static final int crime_list_item_context=0x7f0c0000;
+        public static final int fragment_crime_list=0x7f0c0001;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f0a0000;
@@ -900,7 +907,8 @@ containing a value of this type.
         public static final int new_crime=0x7f0a0016;
         public static final int show_subtitle=0x7f0a0017;
         public static final int subtitle=0x7f0a0018;
-        public static final int title_activity_crime=0x7f0a0019;
+        public static final int take=0x7f0a0019;
+        public static final int title_activity_crime=0x7f0a001a;
     }
     public static final class style {
         /** 
