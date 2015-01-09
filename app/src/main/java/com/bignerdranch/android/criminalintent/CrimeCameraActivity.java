@@ -12,9 +12,9 @@ import android.widget.ImageButton;
 public class CrimeCameraActivity extends SingleFragmentActivity  {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-// Скрытие заголовка окна.
+		// Скрытие заголовка окна.
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-// Скрытие панели состояния и прочего оформления уровня ОС
+		// Скрытие панели состояния и прочего оформления уровня ОС
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 	}

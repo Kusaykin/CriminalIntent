@@ -7,6 +7,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,17 +26,23 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class CrimeFragment extends Fragment {
+	private static final String TAG            = "CrimeFragment";
 	public static final  String EXTRA_CRIME_ID =
 			"com.bignerdranch.android.criminalintent.crime_id";
 	private static final String DIALOG_DATE    = "date";
 	private static final int    REQUEST_DATE   = 0;
-	private Crime    mCrime;
-	private EditText mTitleField;
-	private Button   mDateButton;
-	private CheckBox mSolvedCheckBox;
-	private static final String TAG = "Crime";
+	private static final int    REQUEST_PHOTO  = 1;
+	private static final String DIALOG_IMAGE = "image";
+
+	private Crime       mCrime;
+	private EditText    mTitleField;
+	private Button      mDateButton;
+	private CheckBox    mSolvedCheckBox;
+	private ImageView   mPhotoView;
+
 	private ImageButton mPhotoButton;
 
 	@Override
@@ -65,9 +72,9 @@ public class CrimeFragment extends Fragment {
 					item.setTitle(R.string.hide_subtitle);
 				} else {
 					getActivity().getActionBar().setSubtitle(null);
-				item.setTitle(R.string.show_subtitle);
-			}
-			return true; 
+					item.setTitle(R.string.show_subtitle);
+				}
+				return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -93,6 +100,16 @@ public class CrimeFragment extends Fragment {
 					.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
 			mCrime.setDate(date);
 			updateDate();
+		} else if (requestCode == REQUEST_PHOTO) {
+			// Создание нового объекта Photo и связывание его с Crime
+			String filename = data
+					.getStringExtra(CrimeCameraFragment.EXTRA_PHOTO_FILENAME);
+			if (filename != null) {
+				Photo p = new Photo(filename);
+				mCrime.setPhoto(p);
+				//Log.i(TAG, "Crime: " + mCrime.getTitle() + " has a photo");
+				showPhoto();
+			}
 		}
 	}
 	public static CrimeFragment newInstance(UUID crimeId) {
@@ -158,7 +175,21 @@ public class CrimeFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getActivity(), CrimeCameraActivity.class);
-				startActivity(i);
+				startActivityForResult(i, REQUEST_PHOTO);
+			}
+		});
+		mPhotoView = (ImageView)v.findViewById(R.id.crime_imageView);
+		mPhotoView.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Photo p = mCrime.getPhoto();
+				if (p == null)
+					return;
+				FragmentManager fm = getActivity()
+						.getSupportFragmentManager();
+				String path = getActivity()
+						.getFileStreamPath(p.getFilename()).getAbsolutePath();
+				ImageFragment.newInstance(path)
+						.show(fm, DIALOG_IMAGE);
 			}
 		});
 		// Если камера недоступна, заблокировать функциональность
@@ -169,5 +200,26 @@ public class CrimeFragment extends Fragment {
 			mPhotoButton.setEnabled(false);
 		}
 		return v;
+	}
+	private void showPhoto() {
+	// Назначение изображения, полученного на основе фотографии
+		Photo p = mCrime.getPhoto();
+		BitmapDrawable b = null;
+		if (p != null) {
+			String path = getActivity()
+					.getFileStreamPath(p.getFilename()).getAbsolutePath();
+			b = PictureUtils.getScaledDrawable(getActivity(), path);
+		}
+		mPhotoView.setImageDrawable(b);
+	}
+	@Override
+	public void onStart() {
+		super.onStart();
+		showPhoto();
+	}
+	@Override
+	public void onStop() {
+		super.onStop();
+		PictureUtils.cleanImageView(mPhotoView);
 	}
 }

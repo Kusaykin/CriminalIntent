@@ -1,7 +1,9 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,7 +25,9 @@ import java.util.UUID;
  * Created  on 24.12.2014.
  */
 public class CrimeCameraFragment extends Fragment {
-	private static final String TAG = "CrimeCameraFragment";
+	private static final String TAG                  = "CrimeCameraFragment";
+	public static final  String EXTRA_PHOTO_FILENAME =
+			"com.bignerdranch.android.criminalintent.photo_filename";
 	private Camera      mCamera;
 	private SurfaceView mSurfaceView;
 	private View        mProgressContainer;
@@ -38,9 +42,9 @@ public class CrimeCameraFragment extends Fragment {
 
 	private Camera.PictureCallback mJpegCallback = new Camera.PictureCallback() {
 		public void onPictureTaken(byte[] data, Camera camera) {
-	// Создание имени файла
+			// Создание имени файла
 			String filename = UUID.randomUUID().toString() + ".jpg";
-	// Сохранение данных jpeg на диске
+			// Сохранение данных jpeg на диске
 			FileOutputStream os = null;
 			boolean success = true;
 			try {
@@ -59,7 +63,12 @@ public class CrimeCameraFragment extends Fragment {
 				}
 			}
 			if (success) {
-				Log.i(TAG, "JPEG saved at " + filename);
+				//Log.i(TAG, "JPEG saved at " + filename);
+				Intent i = new Intent();
+				i.putExtra(EXTRA_PHOTO_FILENAME, filename);
+				getActivity().setResult(Activity.RESULT_OK, i);
+			} else {
+				getActivity().setResult(Activity.RESULT_CANCELED);
 			}
 			getActivity().finish();
 		}
