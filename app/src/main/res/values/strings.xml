@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CriminalIntent</string>
-    <string name="title_activity_crime">CrimeActivity</string>
-    <string name="crime_title_hint">Укажите заголовок преступления</string>
-    <string name="crime_title_label">Наименование</string>
-    <string name="crime_details_label">Детали</string>
-    <string name="crime_solved_label">Выяснено?</string>
-    <string name="crimes_title">Преступления</string>
-    <string name="date_picker_title">Дата преступления:</string>
-    <string name="new_crime">Новое преступление</string>
-    <string name="show_subtitle">Показать описание</string>
-    <string name="hide_subtitle">Скрыть описание</string>
-    <string name="subtitle">If you see something, say something.</string>
-    <string name="delete_crime">Удалить</string>
-    <string name="take">Щелк!</string>
-    <string name="crime_suspect_text">Выберите подозреваемого</string>
-    <string name="crime_report_text">Отправить отчет</string>
+<string name="app_name">CriminalIntent</string>
+<string name="title_activity_crime">CrimeActivity</string>
+<string name="crime_title_hint">Укажите заголовок преступления</string>
+<string name="crime_title_label">Наименование</string>
+<string name="crime_details_label">Детали</string>
+<string name="crime_solved_label">Выяснено?</string>
+<string name="crimes_title">Преступления</string>
+<string name="date_picker_title">Дата преступления:</string>
+<string name="new_crime">Новое преступление</string>
+<string name="show_subtitle">Показать описание</string>
+<string name="hide_subtitle">Скрыть описание</string>
+<string name="subtitle">If you see something, say something.</string>
+<string name="delete_crime">Удалить</string>
+<string name="take">Щелк!</string>
+<string name="crime_suspect_text">Выберите подозреваемого</string>
+<string name="crime_report_text">Отправить отчет</string>
+<string name="crime_report">%1$s!
+The crime was discovered on %2$s. %3$s, and %4$s
+</string>
+<string name="crime_report_solved">The case is solved</string>
+<string name="crime_report_unsolved">The case is not solved</string>
+<string name="crime_report_no_suspect">There is no suspect.</string>
+<string name="crime_report_suspect">The suspect is %s.</string>
+<string name="crime_report_subject">CriminalIntent Crime Report</string>
+<string name="send_report">Send crime report via</string>
 </resources>

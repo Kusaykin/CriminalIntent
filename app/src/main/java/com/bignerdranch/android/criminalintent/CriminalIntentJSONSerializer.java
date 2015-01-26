@@ -25,11 +25,11 @@ public class CriminalIntentJSONSerializer {
 	}
 	public void saveCrimes(ArrayList<Crime> crimes) 
 			throws JSONException, IOException {
-		// Построение массива в JSON
+		// РџРѕСЃС‚СЂРѕРµРЅРёРµ РјР°СЃСЃРёРІР° РІ JSON
 		JSONArray array = new JSONArray();
 		for (Crime c : crimes)
 			array.put(c.toJSON());
-		// Запись файла на диск
+		// Р—Р°РїРёСЃСЊ С„Р°Р№Р»Р° РЅР° РґРёСЃРє
 		Writer writer = null;
 		try {
 			OutputStream out = mContext
@@ -47,7 +47,7 @@ public class CriminalIntentJSONSerializer {
 		ArrayList<Crime> crimes = new ArrayList<Crime>();
 		BufferedReader reader = null;
 		try {
-			// Открытие и чтение файла в StringBuilder
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ StringBuilder
 			InputStream in = mContext.openFileInput(mFilename);
 			reader = new BufferedReader(new InputStreamReader(in));
 			StringBuilder jsonString = new StringBuilder();
@@ -56,15 +56,15 @@ public class CriminalIntentJSONSerializer {
 				// Line breaks are omitted and irrelevant
 				jsonString.append(line);
 			}
-			// Разбор JSON с использованием JSONTokener
+			// пїЅпїЅпїЅпїЅпїЅпїЅ JSON пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ JSONTokener
 			JSONArray array = (JSONArray) new JSONTokener(jsonString.toString())
 			.nextValue();
-			// Построение массива объектов Crime по данным JSONObject
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Crime пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ JSONObject
 			for (int i = 0; i < array.length(); i++) {
 				crimes.add(new Crime(array.getJSONObject(i)));
 			}
 		} catch (FileNotFoundException e) {
-			// Происходит при начале "с нуля"; не обращайте внимания
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "пїЅ пїЅпїЅпїЅпїЅ"; пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		} finally {
 			if (reader != null)
 				reader.close();

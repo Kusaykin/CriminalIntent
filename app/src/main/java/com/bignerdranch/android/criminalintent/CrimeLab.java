@@ -16,7 +16,7 @@ public class CrimeLab {
 
 	private CrimeLab(Context appContext) {
 		Log.d(TAG, "Call CrimeLab-CrimeLab");
-
+		mAppContext = appContext;
         mSerializer = new CriminalIntentJSONSerializer(mAppContext, FILENAME);
 
         try {
@@ -46,6 +46,7 @@ public class CrimeLab {
 	public void deleteCrime(Crime c) {
 		mCrimes.remove(c);
 	}
+
 	public static CrimeLab get(Context c) {
 		if (sCrimeLab == null) {
 			sCrimeLab = new CrimeLab(c.getApplicationContext());
