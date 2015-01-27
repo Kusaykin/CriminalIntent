@@ -10,5 +10,8 @@ public class CrimeListActivity extends SingleFragmentActivity {
 		Log.d(TAG, "Call CrimeListActivity-createFragment");
 		return new CrimeListFragment();
 	}
-
+	@Override
+	protected int getLayoutResId() {
+		return R.layout.activity_masterdetail;
+	}
 }

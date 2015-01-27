@@ -9,11 +9,15 @@ import android.util.Log;
 public abstract class SingleFragmentActivity extends FragmentActivity {
 	protected abstract Fragment createFragment();
 	private static final String TAG = "Crime";
+
+	protected int getLayoutResId() {
+		return R.layout.activity_fragment;
+	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		Log.d(TAG, "Call SingleFragmentActivity-onCreate");
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_fragment);
+		setContentView(getLayoutResId());
 		FragmentManager fm = getSupportFragmentManager();
 		Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
 		if (fragment == null) {
