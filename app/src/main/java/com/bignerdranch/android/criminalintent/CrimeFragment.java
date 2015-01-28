@@ -50,7 +50,23 @@ public class CrimeFragment extends Fragment {
 
 	private ImageButton mPhotoButton;
 	private Button mSuspectButton;
-
+	private Callbacks mCallbacks;
+	/**
+	 * Обязательный интерфейс для активности-хоста
+	 */
+	public interface Callbacks {
+		void onCrimeUpdated(Crime crime);
+	}
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		mCallbacks = (Callbacks)activity;
+	}
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		mCallbacks = null;
+	}
 	@Override
 	public void onPause() {
 		super.onPause();
@@ -113,7 +129,7 @@ public class CrimeFragment extends Fragment {
 			if (filename != null) {
 				Photo p = new Photo(filename);
 				mCrime.setPhoto(p);
-				//Log.i(TAG, "Crime: " + mCrime.getTitle() + " has a photo");
+				mCallbacks.onCrimeUpdated(mCrime);
 				showPhoto();
 			}
 		} else if (requestCode == REQUEST_CONTACT) {
@@ -136,6 +152,7 @@ public class CrimeFragment extends Fragment {
 			c.moveToFirst();
 			String suspect = c.getString(0);
 			mCrime.setSuspect(suspect);
+			mCallbacks.onCrimeUpdated(mCrime);
 			mSuspectButton.setText(suspect);
 			c.close();
 		}
@@ -165,6 +182,8 @@ public class CrimeFragment extends Fragment {
 			public void onTextChanged(CharSequence c, int start, int before,
 					int count) {
 				mCrime.setTitle(c.toString());
+				mCallbacks.onCrimeUpdated(mCrime);
+				getActivity().setTitle(mCrime.getTitle());
 			}
 
 			public void beforeTextChanged(CharSequence c, int start, int count,
@@ -194,8 +213,9 @@ public class CrimeFragment extends Fragment {
 		mSolvedCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 			{
-				// ���������� ����� ��������� ������������
+				// Задание признака раскрытия преступления
 				mCrime.setSolved(isChecked);
+				mCallbacks.onCrimeUpdated(mCrime);
 			}
 		});
 		mPhotoButton = (ImageButton)v.findViewById(R.id.crime_imageButton);
